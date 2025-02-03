@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: catalog-service
   newName: ghcr.io/valeriefan/catalog-service
-  newTag: 735d70ac020d0477a9282f8be5be2ffebb938162
+  newTag: 190937c4cb8adcd98df082d8315215ed44b0317c
 
 replicas:
 - count: 2
