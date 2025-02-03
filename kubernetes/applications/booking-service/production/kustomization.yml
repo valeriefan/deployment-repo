@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: booking-service
   newName: ghcr.io/valeriefan/booking-service
-  newTag: a0295e44e73544bf99979a5650abac3513a33594
+  newTag: 604109acdb9dddc6f35eb9f10f681c8e4ab60051
 
 replicas:
 - count: 1
