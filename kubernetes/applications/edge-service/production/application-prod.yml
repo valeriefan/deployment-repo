@@ -2,7 +2,17 @@ spring:
   config:
     import: configtree:/workspace/secrets/*/
 
-management:
-  health:
-    redis:
-      enabled=false:
+  autoconfigure:
+    exclude=org:
+      springframework:
+        boot:
+          autoconfigure:
+            data:
+              redis:
+                RedisAutoConfiguration,org:
+                  springframework:
+                    boot:
+                      autoconfigure:
+                        data:
+                          redis:
+                            RedisRepositoriesAutoConfiguration:
