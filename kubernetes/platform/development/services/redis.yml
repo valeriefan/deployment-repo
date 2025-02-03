@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rentsphere-redis
+  labels:
+    db: rentsphere-redis
+spec:
+  selector:
+    matchLabels:
+      db: rentsphere-redis
+  template:
+    metadata:
+      labels:
+        db: rentsphere-redis
+    spec:
+      containers:
+        - name: rentsphere-redis
+          image: redis
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 200m
+              memory: 100Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rentsphere-redis
+  labels:
+    db: rentsphere-redis
+spec:
+  type: ClusterIP
+  selector:
+    db: rentsphere-redis
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379

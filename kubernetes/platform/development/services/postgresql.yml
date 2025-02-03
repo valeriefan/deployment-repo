@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    db: rentsphere-postgres
+data:
+  init.sql: |
+    CREATE DATABASE rentspheredb_catalog;
+    CREATE DATABASE rentspheredb_booking;
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rentsphere-postgres
+  labels:
+    db: rentsphere-postgres
+spec:
+  selector:
+    matchLabels:
+      db: rentsphere-postgres
+  template:
+    metadata:
+      labels:
+        db: rentsphere-postgres
+    spec:
+      containers:
+        - name: rentsphere-postgres
+          image: postgres
+          env:
+            - name: POSTGRES_USER
+              value: user
+            - name: POSTGRES_PASSWORD
+              value: password
+          resources:
+            requests:
+              cpu: 100m
+              memory: 60Mi
+            limits:
+              cpu: 200m
+              memory: 120Mi
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d
+              name: postgres-config-volume
+      volumes:
+        - name: postgres-config-volume
+          configMap:
+            name: postgres-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rentsphere-postgres
+  labels:
+    db: rentsphere-postgres
+spec:
+  type: ClusterIP
+  selector:
+    db: rentsphere-postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

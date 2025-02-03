@@ -1,0 +1,2 @@
+CREATE DATABASE rentspheredb_catalog;
+CREATE DATABASE rentspheredb_booking;

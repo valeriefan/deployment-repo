@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: edge-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: staging
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 9000
+            initialDelaySeconds: 30  # Increased delay
+            periodSeconds: 15
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 9000
+            initialDelaySeconds: 30  # Increased delay
+            periodSeconds: 15
+            timeoutSeconds: 1

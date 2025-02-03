@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-service
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: catalog-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: staging
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 9001
+            initialDelaySeconds: 30  # Increased delay
+            periodSeconds: 15
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 9001
+            initialDelaySeconds: 30  # Increased delay
+            periodSeconds: 15
+            timeoutSeconds: 1

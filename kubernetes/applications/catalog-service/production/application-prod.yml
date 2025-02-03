@@ -1,0 +1,5 @@
+rentsphere:
+  greeting: Welcome to our house catalog from a production Kubernetes environment!
+spring:
+  config:
+    import: configtree:/workspace/secrets/*/

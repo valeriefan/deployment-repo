@@ -1,0 +1,7 @@
+include('../../../../config-service/Tiltfile')
+include('../../../../catalog-service/Tiltfile')
+include('../../../../booking-service/Tiltfile')
+include('../../../../edge-service/Tiltfile')
+include('../../../../notification-service/Tiltfile')
+
+update_settings(max_parallel_updates=1)

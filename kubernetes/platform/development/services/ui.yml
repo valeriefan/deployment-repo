@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rentsphere-ui
+  labels:
+    app: rentsphere-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rentsphere-ui
+  template:
+    metadata:
+      labels:
+        app: rentsphere-ui
+    spec:
+      containers:
+        - name: rentsphere-ui
+          image: valeriefan1009/polar-ui:tagname
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
+          ports:
+            - containerPort: 9004
+          env:
+            - name: PORT
+              value: "9004"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rentsphere-ui
+  labels:
+    app: rentsphere-ui
+spec:
+  type: ClusterIP
+  selector:
+    app: rentsphere-ui
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9004
