@@ -19,7 +19,7 @@ configMapGenerator:
 images:
 - name: edge-service
   newName: ghcr.io/valeriefan/edge-service
-  newTag: 95eb67169c0412f34ee73549a5e64d7ef36f79da
+  newTag: 50f9bf0b5f0325f03556994c4d536442dbb01620
 
 replicas:
 - count: 1
