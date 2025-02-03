@@ -10,6 +10,32 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod
+            - name: SPRING_REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rentsphere-redis-credentials
+                  key: spring.redis.host
+            - name: SPRING_REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: rentsphere-redis-credentials
+                  key: spring.redis.port
+            - name: SPRING_REDIS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rentsphere-redis-credentials
+                  key: spring.redis.username
+            - name: SPRING_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rentsphere-redis-credentials
+                  key: spring.redis.password
+            - name: SPRING_REDIS_SSL
+              valueFrom:
+                secretKeyRef:
+                  name: rentsphere-redis-credentials
+                  key: spring.redis.ssl
+
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
