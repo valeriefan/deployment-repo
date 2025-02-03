@@ -2,24 +2,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/valeriefan/notification-service/k8s?ref=master
+- github.com/valeriefan/notification-service/k8s?ref=master
 
 patches:
-  - path: patch-env.yml
-  - path: patch-resources.yml
-  - path: patch-volumes.yml
+- path: patch-env.yml
+- path: patch-resources.yml
+- path: patch-volumes.yml
 
 configMapGenerator:
-  - behavior: merge
-    files:
-      - application-prod.yml
-    name: notification-config
+- behavior: merge
+  files:
+  - application-prod.yml
+  name: notification-config
 
 images:
-  - name: notification-service
-    newName: ghcr.io/valeriefan/notification-service
-    newTag: latest
+- name: notification-service
+  newName: ghcr.io/valeriefan/notification-service
+  newTag: ad85b0cbba9a78d7547c4301c99124b9a55adb4d
 
 replicas:
-  - count: 1
-    name: notification-service
+- count: 1
+  name: notification-service
