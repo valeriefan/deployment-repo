@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rentsphere-ui
-          image: valeriefan1009/polar-ui:tagname
+          image: ghcr.io/polarbookshop/polar-ui:v1
           imagePullPolicy: Always
           lifecycle:
             preStop:
