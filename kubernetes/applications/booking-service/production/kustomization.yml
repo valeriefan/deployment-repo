@@ -2,24 +2,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/valeriefan/booking-service/k8s?ref=master
+- github.com/valeriefan/booking-service/k8s?ref=master
 
 patches:
-  - path: patch-env.yml
-  - path: patch-resources.yml
-  - path: patch-volumes.yml
+- path: patch-env.yml
+- path: patch-resources.yml
+- path: patch-volumes.yml
 
 configMapGenerator:
-  - behavior: merge
-    files:
-      - application-prod.yml
-    name: booking-config
+- behavior: merge
+  files:
+  - application-prod.yml
+  name: booking-config
 
 images:
-  - name: booking-service
-    newName: ghcr.io/valeriefan/booking-service
-    newTag: latest
+- name: booking-service
+  newName: ghcr.io/valeriefan/booking-service
+  newTag: a0295e44e73544bf99979a5650abac3513a33594
 
 replicas:
-  - count: 1
-    name: booking-service
+- count: 1
+  name: booking-service
